@@ -1,0 +1,25 @@
+Date,Product,Category,Region,Sales,Profit,Quantity
+2023-01-15,Laptop Pro,Electronics,North,1200.50,300.10,5
+2023-01-20,Wireless Mouse,Electronics,South,45.99,15.50,12
+2023-02-10,Ergonomic Chair,Furniture,East,250.00,80.00,4
+2023-02-28,Standing Desk,Furniture,West,500.00,150.00,2
+2023-03-05,Smartphone,Electronics,North,899.99,200.00,10
+2023-03-12,Coffee Maker,Appliances,South,120.00,40.00,8
+2023-04-01,Headphones,Electronics,East,150.00,50.00,15
+2023-04-18,Bookshelf,Furniture,West,180.00,60.00,6
+2023-05-02,Blender,Appliances,North,80.00,25.00,20
+2023-05-20,Tablet,Electronics,South,450.00,120.00,7
+2023-06-10,Desk Lamp,Furniture,East,35.00,12.00,25
+2023-06-25,Smart Watch,Electronics,West,299.99,90.00,14
+2023-07-05,Microwave,Appliances,North,150.00,45.00,5
+2023-07-22,Monitor,Electronics,South,300.00,80.00,9
+2023-08-11,Sofa,Furniture,East,800.00,250.00,3
+2023-08-29,Air Purifier,Appliances,West,220.00,70.00,6
+2023-09-14,Keyboard,Electronics,North,65.00,20.00,18
+2023-09-30,Dining Table,Furniture,South,600.00,180.00,2
+2023-10-15,Vacuum Cleaner,Appliances,East,280.00,85.00,4
+2023-10-28,External Hard Drive,Electronics,West,110.00,35.00,11
+2023-11-10,Office Chair,Furniture,North,200.00,65.00,8
+2023-11-25,Toaster,Appliances,South,40.00,15.00,16
+2023-12-05,Gaming Console,Electronics,East,499.99,100.00,12
+2023-12-20,TV Stand,Furniture,West,150.00,50.00,5

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Premium Data Analytics</title>
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Processing Data...</p>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class='bx bx-cube-alt'></i>
+            <span>Nexus Analytics</span>
+        </div>
+        <ul class="nav-links">
+            <li class="active"><a href="#"><i class='bx bx-grid-alt'></i> Dashboard</a></li>
+            <li><a href="#"><i class='bx bx-line-chart'></i> Analytics</a></li>
+            <li><a href="#"><i class='bx bx-table'></i> Raw Data</a></li>
+            <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>&copy; 2026 Nexus Inc.</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="header-left">
+                <h1>Dashboard Overview</h1>
+                <p class="date-text" id="currentDate">Loading date...</p>
+            </div>
+            
+            <div class="header-right">
+                <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+                    <i class='bx bx-sun'></i>
+                </button>
+                <div class="export-dropdown">
+                    <button id="exportBtn" class="btn primary-btn">
+                        <i class='bx bx-export'></i> Export
+                    </button>
+                    <div class="dropdown-content" id="exportDropdown">
+                        <a href="#" id="exportCsv"><i class='bx bx-file'></i> Download CSV</a>
+                        <a href="#" id="exportPdf"><i class='bx bxs-file-pdf'></i> Export to PDF</a>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff" alt="User Profile">
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-container" id="pdfArea">
+            
+            <!-- Upload Section -->
+            <div class="upload-section glass-panel">
+                <div class="drag-area" id="dragArea">
+                    <i class='bx bx-cloud-upload'></i>
+                    <h3>Drag & Drop your CSV here</h3>
+                    <span>OR</span>
+                    <button class="btn secondary-btn" id="browseFileBtn">Browse File</button>
+                    <input type="file" id="csvFileInput" accept=".csv" hidden>
+                </div>
+                <div class="upload-status" id="uploadStatus">
+                    Using Sample Dataset. Upload a CSV to override.
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card glass-panel">
+                    <div class="kpi-icon blue"><i class='bx bx-data'></i></div>
+                    <div class="kpi-info">
+                        <p>Total Records</p>
+                        <h2 id="kpiTotal">0</h2>
+                    </div>
+                </div>
+                <div class="kpi-card glass-panel">
+                    <div class="kpi-icon green"><i class='bx bx-trending-up'></i></div>
+                    <div class="kpi-info">
+                        <p>Total Sum (Sales)</p>
+                        <h2 id="kpiSum">0</h2>
+                    </div>
+                </div>
+                <div class="kpi-card glass-panel">
+                    <div class="kpi-icon purple"><i class='bx bx-stats'></i></div>
+                    <div class="kpi-info">
+                        <p>Average Value</p>
+                        <h2 id="kpiAvg">0</h2>
+                    </div>
+                </div>
+                <div class="kpi-card glass-panel">
+                    <div class="kpi-icon orange"><i class='bx bx-star'></i></div>
+                    <div class="kpi-info">
+                        <p>Max Value</p>
+                        <h2 id="kpiMax">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Options & Insights -->
+            <div class="chart-controls-panel glass-panel">
+                <div class="control-group">
+                    <label for="metricSelect">Metric Column:</label>
+                    <select id="metricSelect" class="custom-select">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="dimensionSelect">Dimension Column:</label>
+                    <select id="dimensionSelect" class="custom-select">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="insights-box">
+                    <h4><i class='bx bx-bulb'></i> AI Insights</h4>
+                    <p id="aiInsightsText">Upload data to generate insights.</p>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <div class="chart-container glass-panel col-span-2">
+                    <div class="chart-header">
+                        <h3><i class='bx bx-bar-chart'></i> Main Distribution</h3>
+                    </div>
+                    <div class="canvas-wrapper main-chart-wrapper">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container glass-panel">
+                    <div class="chart-header">
+                        <h3><i class='bx bx-pie-chart-alt-2'></i> Proportion</h3>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container glass-panel">
+                    <div class="chart-header">
+                        <h3><i class='bx bx-line-chart-down'></i> Trend Analysis</h3>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container glass-panel col-span-2">
+                    <div class="chart-header">
+                        <h3><i class='bx bx-pie-chart-alt'></i> Category Distribution (Doughnut)</h3>
+                    </div>
+                    <div class="canvas-wrapper main-chart-wrapper">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container glass-panel col-span-2">
+                    <div class="chart-header">
+                        <h3><i class='bx bxs-area'></i> Cumulative Data</h3>
+                    </div>
+                    <div class="canvas-wrapper main-chart-wrapper">
+                        <canvas id="areaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table Section -->
+            <div class="table-section glass-panel">
+                <div class="table-header">
+                    <h3><i class='bx bx-table'></i> Data Preview</h3>
+                    <div class="table-controls">
+                        <div class="search-box">
+                            <i class='bx bx-search'></i>
+                            <input type="text" id="searchInput" placeholder="Search data...">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="dataTable">
+                        <thead>
+                            <tr id="tableHeadRow">
+                                <!-- Headers injected via JS -->
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer" id="tableFooter">
+                    Showing 0 of 0 entries
+                </div>
+            </div>
+
+        </div> <!-- End Dashboard Container -->
+    </main>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
